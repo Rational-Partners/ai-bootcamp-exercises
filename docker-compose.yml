@@ -1,0 +1,26 @@
+services:
+  exercises:
+    build: .
+    ports:
+      - "3000:3000"
+      - "4000:4000"
+      - "5001:5001"
+    volumes:
+      # Mount source code from host (editable by Claude Code)
+      - ./exercises/ai-training-practical:/workspace/ai-training-practical
+      - ./exercises/ai-training-practical-two:/workspace/ai-training-practical-two
+      # Keep node_modules inside container (platform-specific binaries)
+      - practical_root_modules:/workspace/ai-training-practical/node_modules
+      - practical_fe_modules:/workspace/ai-training-practical/frontend/node_modules
+      - practical_be_modules:/workspace/ai-training-practical/backend/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+      - FRONTEND_URL=http://localhost:4000
+    stdin_open: true
+    tty: true
+
+volumes:
+  practical_root_modules:
+  practical_fe_modules:
+  practical_be_modules:

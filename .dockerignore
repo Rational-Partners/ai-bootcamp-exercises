@@ -1,0 +1,5 @@
+.git
+exercises/*/node_modules
+exercises/*/.git
+*.md
+!scripts/start.sh
